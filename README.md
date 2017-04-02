@@ -31,7 +31,7 @@ At each step in time, the following transitions occur:
 ## Execution
 
 ```
-python ChsChess.py
+python Main.py
 ```
 
 ## Build as exe file
