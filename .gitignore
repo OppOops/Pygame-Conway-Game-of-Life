@@ -1,0 +1,9 @@
+*.pyo
+*.pyc
+*.pyd
+*.exe
+*.dll
+*.log
+dist/IMG
+dist/tcl
+build/bdist.win32
