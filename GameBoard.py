@@ -47,15 +47,20 @@ class CellularAutomaton:
 	
 	def assignGen(self, board, m, n):
 		mapDict = self.dic
+		count = 0
 		for i in xrange(m):
 			for k in xrange(n):
-				board[i][k] = mapDict[board[i][k]]
+				val = mapDict[board[i][k]]
+				board[i][k] = val
+				if val == 1:
+					count += 1
+		return count
 		
 	def nextGen(self, board):
 		m = len(board)
 		n = len(board[0])
 		self.updateCount(board,m,n)
-		self.assignGen(board,m,n)
+		return self.assignGen(board,m,n)
 		
 class GameModel:
 	def __init__(self):
@@ -65,11 +70,12 @@ class GameModel:
 		self.sample = 200
 		self.csize  = 10
 		self.iter   = 0
+		self.lives  = 0
 		self.cellatm = CellularAutomaton()
 	
 	def next(self):
 		self.iter += 1
-		self.cellatm.nextGen(self.map)
+		self.lives = self.cellatm.nextGen(self.map)
 	
 	def genRandom(self, m, n, s):
 		random.seed()
@@ -168,6 +174,9 @@ class GameBoard:
 
 	def __showTipInfo(self, window):
 		y = self.model.n * self.model.csize
+		text, textpos = self.load_font("cells: " + str(self.model.lives))
+		textpos = Rect(0, y-45, 40, 28)
+		window.blit(text, textpos)
 		text, textpos = self.load_font("generation: " + str(self.model.iter))
 		textpos = Rect(0, y-30, 40, 28)
 		window.blit(text, textpos)

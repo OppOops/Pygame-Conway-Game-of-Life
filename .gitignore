@@ -5,5 +5,6 @@
 *.dll
 *.log
 dist/IMG
+dist/UI
 dist/tcl
 build/bdist.win32
